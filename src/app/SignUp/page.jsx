@@ -1,0 +1,263 @@
+'use client';
+
+import { Eye, EyeOff } from 'lucide-react';
+import { FaTwitter } from "react-icons/fa";
+import React, { useState } from 'react';
+
+const Page = () => {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: '' }); // clear error
+  };
+
+  const validate = () => {
+    const newErrors = {};
+
+    // Username validation
+    // if (!formData.username.trim()) {
+    //   newErrors.username = 'Username is required';
+    // }
+    // else if (formData.password.length < 6) {
+    //   newErrors.password = 'Password must be at least 6 characters';
+    // }
+
+    // Email validation
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+    ) {
+      newErrors.email = 'Enter a valid email';
+    }
+
+    // Password validation
+    if (!formData.password.trim()) {
+      newErrors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      newErrors.password = 'Password must be at least 6 characters';
+    }
+
+    // Confirm password
+    if (formData.confirmPassword !== formData.password) {
+      newErrors.confirmPassword = 'Passwords do not match';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log('Form submitted:', formData);
+      // Handle form submission here (API call, redirect, etc.)
+    }
+  };
+
+  return (
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/Sign up.png')" }}
+    >
+      <div className="bg-white/10 backdrop-blur-md shadow-2xl px-10 py-6 rounded-2xl w-full max-w-md border border-white/30">
+        <h2 className="flex items-center gap-2 text-2xl font-semibold mb-3 text-black"><FaTwitter size={28} className='text-primary'/>Sign up</h2>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block mb-1 text-sm text-black">Username</label>
+            <input
+              name="username"
+              type="text"
+              value={formData.username}
+              onChange={handleChange}
+              placeholder="anna_XOXO"
+              className="w-full text-[15px] px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 border border-white/40 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+            />
+            {errors.username && <p className="text-sm text-red-600 mt-1">{errors.username}</p>}
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-black">Email</label>
+            <input
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="user@email.com"
+              className="w-full text-[15px] px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 border border-white/40 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+            />
+            {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email}</p>}
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-black">Password</label>
+            <div className="relative">
+              <input
+                name="password"
+                type={showPassword ? 'text' : 'password'}
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                className="w-full text-[14px] px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 border border-white/40 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-3 flex items-center gap-1 text-sm text-gray-700 cursor-pointer"
+              >
+               {showPassword ? <EyeOff size={16}/> : <Eye size={16}/>}
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+            {errors.password && <p className="text-sm text-red-600 mt-1">{errors.password}</p>}
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-black">Confirm Password</label>
+            <div className="relative">
+              <input
+                name="confirmPassword"
+                type={showConfirm ? 'text' : 'password'}
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Re-enter your password"
+                className="w-full px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 border border-white/40 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirm(!showConfirm)}
+                className="absolute inset-y-0 right-3 flex items-center gap-1 text-sm text-gray-700 cursor-pointer"
+              >
+               {showConfirm ? <EyeOff size={16}/> : <Eye size={16}/>}
+                {showConfirm ? "Hide" : "Show"}
+              </button>
+            </div>
+            {errors.confirmPassword && (
+              <p className="text-sm text-red-600 mt-1">{errors.confirmPassword}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-[#1DA1F2] transition text-white py-2 mt-1 rounded-md font-medium cursor-pointer"
+          >
+            Sign up
+          </button>
+        </form>
+
+        <p className="text-sm text-center text-gray-700 mt-4">
+          Already have an account?{' '}
+          <a href="/signIn" className="text-primary hover:underline">
+            Sign in
+          </a>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Page;
+
+
+
+
+
+
+
+
+// "use client"
+// import { Eye } from 'lucide-react';
+// import React from 'react'
+// import { useState } from "react";
+
+//  const page = () => {
+//      const [showPassword, setShowPassword] = useState(false);
+//   const [showConfirm, setShowConfirm] = useState(false);
+//   return (
+//     <div
+//       className="flex items-center justify-center min-h-screen bg-cover bg-center bg-no-repeat"
+//       style={{ backgroundImage: "url('/Sign up.png')" }}
+//     >
+//       <div className="bg-white/10 backdrop-blur-md shadow-2xl p-10 rounded-2xl w-full max-w-md border border-white/30">
+//         <h2 className="text-3xl font-semibold mb-6 text-black">Sign up</h2>
+
+//         <form className="space-y-5">
+//           <div>
+//             <label className="block mb-1 text-sm text-black">Email</label>
+//             <input
+//               type="email"
+//               placeholder="user@email.com"
+//               className="w-full text-[15px] px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+//             />
+//           </div>
+
+//           <div>
+//             <label className="block mb-1 text-sm text-black">Password</label>
+//             <div className="relative">
+//               <input
+//                 type={showPassword ? "text" : "password"}
+//                 // type='text'
+//                 placeholder="Enter your password"
+//                 className="w-full text-[14px] px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+//               />
+//               <button
+//                 type="button"
+//                 onClick={() => setShowPassword(!showPassword)}
+//                 className="absolute inset-y-0 right-3 flex items-center gap-1 text-sm text-gray-700 cursor-pointer"
+//               >
+//                 {showPassword ? <Eye size={16}/> : <Eye size={16}/>}
+//                 {showPassword ? "Hide" : "Show"}
+//               </button>
+//             </div>
+//           </div>
+
+//           <div>
+//             <label className="block mb-1 text-sm text-black">Confirm Password</label>
+//             <div className="relative">
+//               <input
+//                 type={showConfirm ? "text" : "password"}
+//                 // type="text"
+//                 placeholder="Re-enter your password"
+//                 className="w-full px-4 py-2 rounded-md bg-white/30 text-black placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-[#1DA1F2]"
+//               />
+//               <button
+//                 type="button"
+//                 onClick={() => setShowConfirm(!showConfirm)}
+//                 className="absolute inset-y-0 right-3 flex items-center gap-1 text-sm text-gray-700 cursor-pointer"
+//               >
+//                 {showConfirm ? <Eye size={16}/> : <Eye size={16}/>}
+//                 {showConfirm ? "Hide" : "Show"}
+//               </button>
+//             </div>
+//           </div>
+
+//           <button
+//             type="submit"
+//             className="w-full bg-[#1DA1F2] transition text-white py-2 rounded-md font-medium cursor-pointer"
+//           >
+//             Sign up
+//           </button>
+//         </form>
+
+//         <p className="text-sm text-center text-gray-700 mt-4">
+//           Already have an account?{" "}
+//           <a href="/signIn" className="text-primary hover:underline">
+//             Sign in
+//           </a>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default page;

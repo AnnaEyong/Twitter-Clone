@@ -63,15 +63,15 @@ export default function page() {
 {/* GRID 2 */}
     <main className='border-1 border-secondary'>
         <div className='flex justify-between items-center border-b-1 border-secondary px-[3%] py-[1%] font-semibold'>Home
-          <div className='flex gap-3'>
-          <SignedOut>
-              <SignInButton />
-              <SignUpButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            </div>
+          <div className='flex gap-2'>
+          <Link href='/SignUp' className='flex gap-3 font-medium hover:text-primary transition duration-3s'>
+          Sign Up
+            </Link>
+
+            <Link href='/signIn' className='flex gap-3 font-medium border-l-1 border-white/10 pl-2 hover:text-primary transition duration-3s'>
+          Sign in
+            </Link>
+          </div>
         </div>
 
       <div>

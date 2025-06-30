@@ -44,16 +44,16 @@ export default async function page() {
     <aside className='flex flex-col justify-between h-screen py-[6%]'>
       <ul className='flex flex-col gap-5 text-[.9rem] font-semibold fixed'>
           <li className='flex gap-3'><FaTwitter size={20} className='text-primary'/></li>
-          <li className='flex gap-3 items-center text-primary'><RiHomeHeartFill size={20}/>Home</li>
-          <li className='flex gap-3 items-center'><HiOutlineHashtag size={20}/>Explore</li>
-          <li className='flex gap-3 items-center'><VscBell size={20}/>Notifications</li>
-          <li className='flex gap-3 items-center'><LuMail size={20}/>Messages</li>
-          <li className='flex gap-3 items-center'><IoBookmarkOutline size={20}/>Bookmarks</li>
-          <li className='flex gap-3 items-center'><CgNotes size={20}/>Lists</li>
-          <Link href='/profileedit' className='flex gap-3 items-center focus:text-primary'><FaRegUser size={20}/>Profile</Link>
-          <li className='flex gap-3 items-center'><CgMoreO size={20}/>More</li>
-          <li className='flex gap-2 items-center'><ModeToggle />Theme</li>
-          <button className='bg-primary rounded-full font-medium py-2 text-[.9rem] text-white'>Tweet</button>
+          <li className='flex gap-3 items-center cursor-pointer text-primary'><RiHomeHeartFill size={20}/>Home</li>
+          <li className='flex gap-3 items-center cursor-pointer'><HiOutlineHashtag size={20}/>Explore</li>
+          <li className='flex gap-3 items-center cursor-pointer'><VscBell size={20}/>Notifications</li>
+          <li className='flex gap-3 items-center cursor-pointer'><LuMail size={20}/>Messages</li>
+          <li className='flex gap-3 items-center cursor-pointer'><IoBookmarkOutline size={20}/>Bookmarks</li>
+          <li className='flex gap-3 items-center cursor-pointer'><CgNotes size={20}/>Lists</li>
+          <Link href='/profileedit' className='flex gap-3 items-center cursor-pointer'><FaRegUser size={20}/>Profile</Link>
+          <li className='flex gap-3 items-center cursor-pointer'><CgMoreO size={20}/>More</li>
+          <li className='flex gap-2 items-center cursor-pointer'><ModeToggle />Theme</li>
+          <button className='bg-primary rounded-full font-medium cursor-pointer py-2 text-[.9rem] text-white'>Tweet</button>
 
            <div className='flex gap-2 items-center mt-[3rem]'>
         <img src='/Profile Picture.png' alt='profile' className='rounded-full w-10 h-10'/>
@@ -90,7 +90,7 @@ export default async function page() {
       <div>
         <div className='flex gap-2 items-center px-[3%] py-[1%] text-[.85rem]'>
             <img src='/Profile Picture.png' alt='profile' className='rounded-full w-10 h-10'/>
-            <input type='text' placeholder="What's happening?" className='text-gray-500 font-semibold w-full' />
+            <input type='text' placeholder="What's happening?" className='font-semibold w-full outline-none' />
         </div>
 
         <div className='flex items-center justify-between px-[2%] pb-[2%]'>

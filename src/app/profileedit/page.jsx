@@ -78,15 +78,15 @@ export default function Profile() {
                 <ul className='flex flex-col gap-5 text-[.9rem] font-semibold fixed'>
                     <li className='flex gap-3'><FaTwitter size={20}/></li>
                     <Link href='/' className='flex gap-3 items-center focus:text-primary'><RiHomeHeartFill size={20}/>Home</Link>
-                    <li className='flex gap-3 items-center'><HiOutlineHashtag size={20}/>Explore</li>
-                    <li className='flex gap-3 items-center'><VscBell size={20}/>Notifications</li>
-                    <li className='flex gap-3 items-center'><LuMail size={20}/>Messages</li>
-                    <li className='flex gap-3 items-center'><IoBookmarkOutline size={20}/>Bookmarks</li>
-                    <li className='flex gap-3 items-center'><CgNotes size={20}/>Lists</li>
-                    <li className='flex gap-3 items-center text-primary'><FaRegUser size={20}/>Profile</li>
-                    <li className='flex gap-3 items-center'><CgMoreO size={20}/>More</li>
-                    <li className='flex gap-2 items-center'><ModeToggle />Theme</li>
-                    <button className='bg-primary rounded-full font-medium py-2 text-[.9rem] text-white'>Tweet</button>
+                    <li className='flex gap-3 items-center cursor-pointer'><HiOutlineHashtag size={20}/>Explore</li>
+                    <li className='flex gap-3 items-center cursor-pointer'><VscBell size={20}/>Notifications</li>
+                    <li className='flex gap-3 items-center cursor-pointer'><LuMail size={20}/>Messages</li>
+                    <li className='flex gap-3 items-center cursor-pointer'><IoBookmarkOutline size={20}/>Bookmarks</li>
+                    <li className='flex gap-3 items-center cursor-pointer'><CgNotes size={20}/>Lists</li>
+                    <li className='flex gap-3 items-center cursor-pointer text-primary'><FaRegUser size={20}/>Profile</li>
+                    <li className='flex gap-3 items-center cursor-pointer'><CgMoreO size={20}/>More</li>
+                    <li className='flex gap-2 items-center cursor-pointer'><ModeToggle />Theme</li>
+                    <button className='bg-primary rounded-full font-medium cursor-pointer py-2 text-[.9rem] text-white'>Tweet</button>
           
                      <div className='flex gap-2 items-center mt-[3rem]'>
                   <img src={profile.avatar} alt='profile' className='object-cover rounded-full w-10 h-10'/>
@@ -267,7 +267,7 @@ export default function Profile() {
       {/* Modal */}
       {isEditing && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/60 backdrop-blur-lg z-50">
-          <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md shadow-lg">
+          <div className="bg-gray-900 rounded-lg p-6 w-full max-w-md shadow-lg">
             <h3 className="text-lg font-semibold mb-4">Edit Profile</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-4 text-center">

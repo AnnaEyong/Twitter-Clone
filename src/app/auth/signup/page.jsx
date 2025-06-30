@@ -1,5 +1,5 @@
 'use client';
-
+import { SignUpButton } from '@clerk/nextjs'
 import { Eye, EyeOff } from 'lucide-react';
 import { FaTwitter } from "react-icons/fa";
 import React, { useState } from 'react';
@@ -71,6 +71,33 @@ const Page = () => {
     >
       <div className="bg-white/10 backdrop-blur-md shadow-2xl px-10 py-6 rounded-2xl w-full max-w-md border border-white/30">
         <h2 className="flex items-center gap-2 text-2xl font-semibold mb-3 text-black"><FaTwitter size={28} className='text-primary'/>Sign up</h2>
+
+        <div className='flex justify-between gap-4 text-gray-600'>
+                  <SignUpButton mode='redirect' redirect_url='/'>
+                  <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
+                    <img src='/google.png' alt='google' className='w-4.5'/>
+                  </div>
+                  </SignUpButton >
+        
+                  <SignUpButton mode='redirect' redirect_url='/'>
+                  <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
+                    <img src='/facebook.png' alt='facebook' className='w-4.5'/>
+                  </div>
+                  </SignUpButton >
+        
+                <SignUpButton mode='redirect' redirect_url='/'>
+                  <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
+                    <img src='/insta.png' alt='insta' className='w-7.5'/>
+                  </div>
+                </SignUpButton>   
+                </div>
+                
+        
+                <div className='relative flex items-center justify-between text-black/30 pt-4 pb-2'>
+                  <hr className='border-1 border-black/10 w-[46%]'/>
+                  <p className='text-sm mt-[-2px]'>or</p>
+                  <hr className='border-1 border-black/10 w-[46%]'/>
+                </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -157,7 +184,7 @@ const Page = () => {
 
         <p className="text-sm text-center text-gray-700 mt-4">
           Already have an account?{' '}
-          <a href="/signIn" className="text-primary hover:underline">
+          <a href="/auth/signin" className="text-primary hover:underline">
             Sign in
           </a>
         </p>

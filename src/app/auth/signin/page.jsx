@@ -1,4 +1,5 @@
 "use client"
+import { SignInButton } from '@clerk/nextjs'
 import { Eye, EyeOff } from 'lucide-react';
 import { FaTwitter } from "react-icons/fa";
 import React from 'react'
@@ -64,18 +65,25 @@ import { useState } from "react";
         <h2 className="flex items-center gap-2 text-2xl font-semibold mb-6 text-black"><FaTwitter size={28} className='text-primary'/>Sign in</h2>
         
         <div className='flex justify-between gap-4 text-gray-600'>
+          <SignInButton mode='redirect' redirect_url='/'>
           <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
             <img src='/google.png' alt='google' className='w-4.5'/>
           </div>
+          </SignInButton >
 
+          <SignInButton mode='redirect' redirect_url='/'>
           <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
             <img src='/facebook.png' alt='facebook' className='w-4.5'/>
           </div>
+          </SignInButton >
 
+        <SignInButton mode='redirect' redirect_url='/'>
           <div className='bg-white/30 rounded-sm py-1 w-[33%] shadow-md flex items-center justify-center cursor-pointer'>
             <img src='/insta.png' alt='insta' className='w-7.5'/>
-          </div>   
+          </div>
+        </SignInButton>   
         </div>
+        
 
         <div className='relative flex items-center justify-between text-black/30 pt-4 pb-2'>
           <hr className='border-1 border-black/10 w-[46%]'/>
@@ -152,7 +160,7 @@ import { useState } from "react";
 
         <p className="text-sm text-center text-gray-700 mt-2">
           Don't have an account yet?{" "}
-          <a href="/SignUp" className="text-primary hover:underline">
+          <a href="/signup" className="text-primary hover:underline">
             Sign up
           </a>
         </p>

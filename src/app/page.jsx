@@ -20,6 +20,8 @@ import { GiHearts } from "react-icons/gi";
 import { LuUpload } from "react-icons/lu";
 import { CiSearch } from "react-icons/ci";
 import { ModeToggle } from '../components/toggle/ModeToggle';
+import {auth, currentUser} from '@clerk/nextjs/server'
+import { redirect} from 'next/navigation'
 
 import {
   ClerkProvider,
@@ -30,7 +32,11 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 
-export default function page() {
+export default async function page() {
+  const { userId } = await auth()
+    if (!userId) {
+      redirect('/auth/signup')
+    }
   return (
     <section className='grid grid-cols-[1fr_3fr_1.3fr] gap-2 px-[6%]'>
 
@@ -44,7 +50,7 @@ export default function page() {
           <li className='flex gap-3 items-center'><LuMail size={20}/>Messages</li>
           <li className='flex gap-3 items-center'><IoBookmarkOutline size={20}/>Bookmarks</li>
           <li className='flex gap-3 items-center'><CgNotes size={20}/>Lists</li>
-          <Link href='/profile' className='flex gap-3 items-center focus:text-primary'><FaRegUser size={20}/>Profile</Link>
+          <Link href='/profileedit' className='flex gap-3 items-center focus:text-primary'><FaRegUser size={20}/>Profile</Link>
           <li className='flex gap-3 items-center'><CgMoreO size={20}/>More</li>
           <li className='flex gap-2 items-center'><ModeToggle />Theme</li>
           <button className='bg-primary rounded-full font-medium py-2 text-[.9rem] text-white'>Tweet</button>
@@ -64,20 +70,27 @@ export default function page() {
     <main className='border-1 border-secondary'>
         <div className='flex justify-between items-center border-b-1 border-secondary px-[3%] py-[1%] font-semibold'>Home
           <div className='flex gap-2'>
-          <Link href='/SignUp' className='flex gap-3 font-medium hover:text-primary transition duration-3s'>
+          {/* <Link href='/SignUp' className='flex gap-3 font-medium hover:text-primary transition duration-3s'>
           Sign Up
             </Link>
 
             <Link href='/signIn' className='flex gap-3 font-medium border-l-1 border-white/10 pl-2 hover:text-primary transition duration-3s'>
           Sign in
-            </Link>
+            </Link> */}
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
         </div>
 
       <div>
         <div className='flex gap-2 items-center px-[3%] py-[1%] text-[.85rem]'>
             <img src='/Profile Picture.png' alt='profile' className='rounded-full w-10 h-10'/>
-            <p className='text-gray-500 font-semibold'>What's happening?</p>
+            <input type='text' placeholder="What's happening?" className='text-gray-500 font-semibold w-full' />
         </div>
 
         <div className='flex items-center justify-between px-[2%] pb-[2%]'>

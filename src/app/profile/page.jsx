@@ -1,3 +1,5 @@
+'use client'
+import { useState } from "react";
 import React from 'react'
 import Link from 'next/link';
 import { FaTwitter } from "react-icons/fa";
@@ -26,6 +28,48 @@ import { ModeToggle } from '../../components/toggle/ModeToggle';
 
 
 export default function page() {
+
+const [isEditing, setIsEditing] = useState(false);
+
+  const [profile, setProfile] = useState({
+    name: "Jerome Bell",
+    bio: "Product Designer",
+    location: "London",
+    joined: "September 2011",
+    avatar: "/Profile Picture.png", // Replace with your default
+  });
+
+  const [formData, setFormData] = useState(profile);
+  const [previewImage, setPreviewImage] = useState(profile.avatar);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData({ ...formData, avatar: file });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Simulate image saving by setting preview image
+    setProfile({
+      ...formData,
+      avatar: previewImage,
+    });
+
+    setIsEditing(false);
+  };
+
   return (
     <section className='grid grid-cols-[1fr_3fr_1.3fr] gap-2 px-[6%]'>
       {/* GRID 1 */}
@@ -67,18 +111,24 @@ export default function page() {
         <div>
             <img src='Cover.png' alt='img' className='w-full'/>
             <div className='px-[2%] flex justify-between text-[.8rem] items-end mt-[-3.5rem]'>
-                <img src='Profile Picture.png' alt='img' className='w-24 h-24 rounded-full border-2 border-background' />
-                <button className='border-1 border-primary text-primary px-3 py-1 rounded-full h-fit'>Edit profile</button>
+                <img src={profile.avatar} alt='img' className='w-24 h-24 rounded-full border-2 border-background' />
+                <Link href='/profileedit' 
+                  onClick={() => {
+                  setFormData(profile);
+                  setPreviewImage(profile.avatar);
+                  setIsEditing(true); 
+                }} 
+                className='border-1 border-primary hover:bg-primary hover:text-white transtion duration-3s text-primary px-3 py-1 rounded-full h-fit'>Edit profile</Link>
             </div>
         </div>
 
         <div className='px-[2%] py-[1%]'>
-            <p className='font-semibold'>Jerome Bell</p>
+            <p className='font-semibold'>{profile.name}</p>
             <p className='text-gray-500 text-[.8rem] mt-[-.3rem]'>@afonsoinocente</p>
-            <p className='text-[.8rem]'>Product Designer</p>
+            <p className='text-[.8rem]'>{profile.bio}</p>
             <div className='flex gap-3 items-center'>
-                <p className='text-gray-500 text-[.8rem] flex items-center gap-2'><GrLocation />London</p>
-                <p className='text-gray-500 text-[.8rem] flex items-center gap-2'><FaRegCalendarAlt />Joined September 2011</p>
+                <p className='text-gray-500 text-[.8rem] flex items-center gap-2'><GrLocation />{profile.location}</p>
+                <p className='text-gray-500 text-[.8rem] flex items-center gap-2'><FaRegCalendarAlt />Joined {profile.joined}</p>
             </div>
             <div className='flex gap-3 items-center'>
                 <p className='text-[.8rem] font-semibold'>569 <span className='text-gray-500 font-normal'>Following</span></p>

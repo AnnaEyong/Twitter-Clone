@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=8096 next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,8 +14,10 @@
     "@radix-ui/react-select": "^2.2.5",
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
+    "cloudinary": "^2.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.511.0",
+    "mongoose": "^8.16.1",
     "next": "15.3.3",
     "next-themes": "^0.4.6",
     "react": "^19.0.0",
@@ -29,6 +31,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/node": "22.15.29",
     "@types/react": "19.1.6",
+    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
     "tailwindcss": "^4",

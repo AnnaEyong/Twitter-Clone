@@ -37,6 +37,7 @@ export default async function page() {
     if (!userId) {
       redirect('/auth/signup')
     }
+    
   return (
     <section className='grid grid-cols-[1fr_3fr_1.3fr] gap-2 px-[6%]'>
 

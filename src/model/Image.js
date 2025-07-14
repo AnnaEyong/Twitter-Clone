@@ -8,7 +8,10 @@ const imageSchema = new Schema({
     UserId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
+    },
+    PostId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
     },
     Type: {
         type: String,

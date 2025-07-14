@@ -1,4 +1,3 @@
-import { FileType } from 'lucide-react'
 import mongoose, {Schema} from 'mongoose'
 
 const postSchema = new Schema({
@@ -8,8 +7,8 @@ const postSchema = new Schema({
         required: true,
     },
     MediaFile: {
-        type: String,
-        FileType: String,
+        url: String,
+        fileType: String,
     },
     UserId: {
         type: mongoose.Schema.Types.ObjectId,
